@@ -35,6 +35,12 @@ class String {
   /// <returns>Возвращаем ссылку на себя</returns>
   String& operator+=(const String& rhs);
 
+  String& operator+=(const char* rhs);
+
+  String operator+(const char* rhs);
+
+  String operator+(const String& rhs);
+
   /// Оператор *=
   /// <returns>Возвращаем ссылку на себя</returns>
   String& operator*=(unsigned int m);

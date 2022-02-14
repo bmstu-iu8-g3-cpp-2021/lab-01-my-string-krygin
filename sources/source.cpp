@@ -2,6 +2,20 @@
 
 #include <string.hpp>
 
+char* prepareStringConcat(const char* str1, const char* str2) {
+  size_t size1 = strlen(str1);
+  size_t size2 = strlen(str2);
+  char* temp = new char[size1 + size2 + 1];
+  for (size_t i = 0; i < size1; i++) {
+    temp[i] = str1[i];
+  }
+  for (size_t j = 0; j < size2; j++) {
+    temp[j+size1] = str2[j];
+  }
+  temp[size1 + size2] = '\0';
+  return temp;
+}
+
 
 String::String() {
   Data = new char[1];
@@ -33,6 +47,31 @@ String &String::operator=(const String &rhs) {
     }
   }
   return *this;
+}
+
+String& String::operator+=(const String& rhs) {
+    char* temp = prepareStringConcat(Data, rhs.Data);
+    delete[] Data;
+    Data = temp;
+    return *this;
+}
+
+String& String::operator+=(const char* rhs) {
+    char* temp = prepareStringConcat(Data, rhs);
+    delete[] Data;
+    Data = temp;
+    return *this;
+}
+
+String String::operator+(const char* rhs) {
+  char* temp = prepareStringConcat(Data, rhs);
+  String result(temp);
+  delete[] temp;
+  return result;
+}
+
+String String::operator+(const String& rhs) {
+    return *this + rhs.Data;
 }
 
 std::ostream& operator<<(std::ostream& o, const String& s) {

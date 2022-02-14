@@ -42,7 +42,6 @@ TEST(String, GetByIndex) {
   EXPECT_EQ('S', s[5]);
 }
 
-/*
 TEST(String, Append) {
   String s1("some");
   s1 += " ";
@@ -52,6 +51,8 @@ TEST(String, Append) {
 
   EXPECT_EQ(s1, s2);
 }
+
+/*
 
 TEST(String, Replace) {
   String s1("some string");
