@@ -79,8 +79,6 @@ TEST(String, Mult) {
   EXPECT_EQ(s2, String("ABCABCABCABCABCABCABCABCABC"));
 }
 
-/*
- *
 TEST(String, Trim) {
   String s("  abc   ____");
 
@@ -94,6 +92,7 @@ TEST(String, Trim) {
   EXPECT_EQ(s, String("abc"));
 }
 
+/*
 TEST(String, Find) {
   String s1("some string");
 

@@ -106,6 +106,34 @@ String& String::operator*=(unsigned int m) {
   return *this;
 }
 
+void String::LTrim(char symbol) {
+  size_t pos = 0;
+  while (Data[pos] == symbol) {
+    pos++;
+  }
+  char* temp = new char[strlen(Data) - pos + 1];
+  for (size_t i = 0; i < strlen(Data); i++) {
+    temp[i] = Data[i + pos];
+  }
+  temp[strlen(Data) - pos] = '\0';
+  delete[] Data;
+  Data = temp;
+}
+
+void String::RTrim(char symbol) {
+  size_t pos = strlen(Data) - 1;
+  while (Data[pos] == symbol) {
+    pos--;
+  }
+  char* temp = new char[pos + 2];
+  for (size_t i = 0; i <= pos; i++) {
+    temp[i] = Data[i];
+  }
+  temp[pos + 1] = '\0';
+  delete[] Data;
+  Data = temp;
+}
+
 std::ostream& operator<<(std::ostream& o, const String& s) {
   o << s.Data;
   return o;
