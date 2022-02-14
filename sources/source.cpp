@@ -111,11 +111,13 @@ void String::LTrim(char symbol) {
   while (Data[pos] == symbol) {
     pos++;
   }
-  char* temp = new char[strlen(Data) - pos + 1];
-  for (size_t i = 0; i < strlen(Data); i++) {
-    temp[i] = Data[i + pos];
+
+  size_t size = strlen(Data) - pos + 1;
+  char* temp = new char[size];
+  for (size_t i = 0; i < size; i++) {
+    temp[i] = Data[pos + i];
   }
-  temp[strlen(Data) - pos] = '\0';
+  temp[size - 1] = '\0';
   delete[] Data;
   Data = temp;
 }
