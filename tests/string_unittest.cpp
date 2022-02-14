@@ -52,8 +52,6 @@ TEST(String, Append) {
   EXPECT_EQ(s1, s2);
 }
 
-/*
-
 TEST(String, Replace) {
   String s1("some string");
 
@@ -61,6 +59,8 @@ TEST(String, Replace) {
 
   EXPECT_EQ(String("Some String"), s1);
 }
+
+/*
 
 TEST(String, Size) {
   String s1("some");

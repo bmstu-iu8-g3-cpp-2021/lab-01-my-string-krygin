@@ -74,6 +74,18 @@ String String::operator+(const String& rhs) {
     return *this + rhs.Data;
 }
 
+size_t String::Size() const {
+  return strlen(Data);
+}
+
+void String::Replace(char oldSymbol, char newSymbol) {
+  for (size_t i = 0; i < strlen(Data); i++) {
+    if (Data[i] == oldSymbol) {
+      Data[i] = newSymbol;
+    }
+  }
+}
+
 std::ostream& operator<<(std::ostream& o, const String& s) {
   o << s.Data;
   return o;
