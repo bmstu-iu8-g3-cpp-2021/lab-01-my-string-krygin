@@ -134,6 +134,35 @@ void String::RTrim(char symbol) {
   Data = temp;
 }
 
+size_t String::Find(const char* substr) const {
+  size_t size1 = strlen(Data);
+  size_t size2 = strlen(substr);
+
+  if (size2 > size1) {
+    return -1;
+  }
+
+  for (size_t i = 0; i < size1 - size2 + 1; i++) {
+    for (size_t j = 0; j < size2; j++) {
+      if (Data[i + j] == substr[j]) {
+        if (j == size2 - 1) {
+          return i;
+        }
+        continue;
+      } else {
+        break;
+      }
+    }
+  }
+  return -1;
+}
+
+size_t String::Find(const String& substr) const {
+  return Find(substr.Data);
+}
+
+
+
 std::ostream& operator<<(std::ostream& o, const String& s) {
   o << s.Data;
   return o;

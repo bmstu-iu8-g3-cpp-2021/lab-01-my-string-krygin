@@ -65,6 +65,9 @@ class String {
   /// возвратить -1</returns>
   size_t Find(const String& substr) const;
 
+  size_t Find(const char* substr) const;
+
+
   /// Функция замены символов, заменяет все символы oldSymbol на newSymbol.
   /// <param name="oldSymbol">Символ, который требуется заменить </param>
   /// <param name="newSymbol">Символ, на который требуется заменить </param>

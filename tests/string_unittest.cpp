@@ -92,7 +92,6 @@ TEST(String, Trim) {
   EXPECT_EQ(s, String("abc"));
 }
 
-/*
 TEST(String, Find) {
   String s1("some string");
 
@@ -106,6 +105,7 @@ TEST(String, Find) {
   EXPECT_EQ(static_cast<size_t>(-1), s1.Find("not found"));
 }
 
+/*
 TEST(String, Stream) {
   std::stringstream stream;
   String s1("some string");
