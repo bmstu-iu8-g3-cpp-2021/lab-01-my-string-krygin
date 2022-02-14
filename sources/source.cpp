@@ -157,11 +157,15 @@ size_t String::Find(const char* substr) const {
   return -1;
 }
 
+void String::swap(String& oth) {
+  char* temp = oth.Data;
+  oth.Data = Data;
+  Data = temp;
+}
+
 size_t String::Find(const String& substr) const {
   return Find(substr.Data);
 }
-
-
 
 std::ostream& operator<<(std::ostream& o, const String& s) {
   o << s.Data;

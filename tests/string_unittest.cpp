@@ -113,7 +113,6 @@ TEST(String, Stream) {
   EXPECT_EQ("some string and stream", stream.str());
 }
 
-/*
 TEST(String, Swap) {
   String s0("some string");
   String s1("other string");
@@ -127,4 +126,3 @@ TEST(String, Swap) {
   EXPECT_EQ("other string", s0);
   EXPECT_EQ("some string", s1);
 }
-*/

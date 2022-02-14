@@ -54,11 +54,6 @@ class String {
       return strcmp(Data, rhs.Data) == 0;
   }
 
-  /// Оператор &lt;
-  /// <param name="rhs">Объект, который стоит после знака "&lt;" </param>
-  /// <returns>Возвращаем значения сравнения двух строк</returns>
-  bool operator<(const String& rhs) const;
-
   /// Функция поиска подстроки
   /// <param name="substr">Подстрока, которую необходимо найти </param>
   /// <returns>Возвращаем позицию substr. Если подстрока не найдена, то
@@ -75,10 +70,10 @@ class String {
 
   /// Функция возвращает длину строки
   /// <returns>Возвращаем длину строки</returns>
-  size_t Size() const;
+  [[nodiscard]] size_t Size() const;
 
   /// Функция для определения пуста ли строка
-  bool Empty() const;
+  [[nodiscard]] bool Empty() const;
 
   /// Оператор []
   /// <example>
