@@ -9,24 +9,47 @@
 class String {
  public:
   /// Деструктор
-  ~String();
+  ~String() {
+      delete [] Data;
+  };
 
   /// Конструктор по умолчанию
-  String();
+  String() {
+      Data = new char[1];
+      Data[0] = '\0';
+  };
 
   /// Конструктор копирования
   /// <param name="rhs">Объект, который копируем </param>
-  String(const String& rhs);
+  String(const String& rhs): String(rhs.Data) {
+
+  }
 
   /// Пользовательский конструктор
   /// <param name="data">Данные, которые требуется поместить в создаваемый
   /// объект </param>
-  String(const char* data);
+  String(const char* data) {
+      size_t size = strlen(data);
+      Data = new char[size + 1];
+      for (size_t i = 0; i < size + 1; i++) {
+        Data[i] = data[i];
+      }
+  };
 
   /// Оператор присваивания
   /// <param name="data">Объект, который копируем </param>
   /// <returns>Возвращаем ссылку на себя</returns>
-  String& operator=(const String& rhs);
+  String& operator=(const String& rhs) {
+    if (this != &rhs) {
+      size_t size = strlen(rhs.Data);
+      delete[] Data;
+      Data = new char[size + 1];
+      for (size_t i = 0; i < size + 1; i++) {
+        Data[i] = rhs.Data[i];
+      }
+    }
+    return *this;
+  };
 
   /// Оператор +=
   /// <param name="rhs">Объект, который стоит после знака '+=' </param>
@@ -40,7 +63,9 @@ class String {
   /// Оператор ==
   /// <param name="rhs">Объект, который стоит после знака '==' </param>
   /// <returns>Возвращаем значения равенства двух строк</returns>
-  bool operator==(const String& rhs) const;
+  bool operator==(const String& rhs) const {
+      return strcmp(Data, rhs.Data) == 0;
+  };
 
   /// Оператор &lt;
   /// <param name="rhs">Объект, который стоит после знака "&lt;" </param>
@@ -74,7 +99,9 @@ class String {
   /// </example>
   /// <param name="index"> Индекс символа </param>
   /// <returns> Значение символа в строке с индексом index</returns>
-  char operator[](size_t index) const;
+  char operator[](size_t index) const {
+      return Data[index];
+  };
 
   /// Оператор []
   /// <example>
@@ -85,7 +112,9 @@ class String {
   /// </example>
   /// <param name="index"> Индекс символа </param>
   /// <returns> Ссылка на символ в строке с индексом index</returns>
-  char& operator[](size_t index);
+  char& operator[](size_t index) {
+      return Data[index];
+  };
 
   /// Смотри пример
   /// <example>
@@ -109,7 +138,14 @@ class String {
 
   void swap(String& oth);
 
-  friend std::ostream& operator<<(std::ostream&, const String&);
+  friend std::ostream& operator<<(std::ostream& o, const String& s) {
+      o << s.Data;
+      return o;
+  };
+
+  friend bool operator==(const char* a, const String& b) {
+    return strcmp(a, b.Data) == 0;
+  }
 
  private:
   char* Data;
