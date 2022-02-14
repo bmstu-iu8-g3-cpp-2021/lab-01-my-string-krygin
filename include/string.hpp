@@ -11,46 +11,24 @@
 class String {
  public:
   /// Деструктор
-  ~String() {
-      delete [] Data;
-  }
+  ~String();
 
   /// Конструктор по умолчанию
-  String() {
-      Data = new char[1];
-      Data[0] = '\0';
-  }
+  String();
 
   /// Конструктор копирования
   /// <param name="rhs">Объект, который копируем </param>
-  String(const String& rhs): String(rhs.Data) {
-  }
+  String(const String& rhs);
 
   /// Пользовательский конструктор
   /// <param name="data">Данные, которые требуется поместить в создаваемый
   /// объект </param>
-  explicit String(const char* data) {
-      size_t size = strlen(data);
-      Data = new char[size + 1];
-      for (size_t i = 0; i < size + 1; i++) {
-        Data[i] = data[i];
-      }
-  }
+  explicit String(const char* data);
 
   /// Оператор присваивания
   /// <param name="data">Объект, который копируем </param>
   /// <returns>Возвращаем ссылку на себя</returns>
-  String& operator=(const String& rhs) {
-    if (this != &rhs) {
-      size_t size = strlen(rhs.Data);
-      delete[] Data;
-      Data = new char[size + 1];
-      for (size_t i = 0; i < size + 1; i++) {
-        Data[i] = rhs.Data[i];
-      }
-    }
-    return *this;
-  }
+  String& operator=(const String& rhs);
 
   /// Оператор +=
   /// <param name="rhs">Объект, который стоит после знака '+=' </param>
@@ -139,14 +117,9 @@ class String {
 
   void swap(String& oth);
 
-  friend std::ostream& operator<<(std::ostream& o, const String& s) {
-      o << s.Data;
-      return o;
-  }
+  friend std::ostream& operator<<(std::ostream&, const String&);
 
-  friend bool operator==(const char* a, const String& b) {
-    return strcmp(a, b.Data) == 0;
-  }
+  friend bool operator==(const char* a, const String& b);
 
  private:
   char* Data;
@@ -177,11 +150,5 @@ bool operator!=(const String& a, const String& b);
 
 /// Оператор &gt;
 bool operator>(const String& a, const String& b);
-
-/// Оператор вывода
-/// <param name="out">Поток куда выводим строку </param>
-/// <param name="str">Строка, которую выводим </param>
-/// <returns>Возвращаем ссылку на поток</returns>
-std::ostream& operator<<(std::ostream& out, const String& str);
 
 #endif  // INCLUDE_STRING_HPP_
