@@ -60,8 +60,6 @@ TEST(String, Replace) {
   EXPECT_EQ(String("Some String"), s1);
 }
 
-/*
-
 TEST(String, Size) {
   String s1("some");
 
@@ -73,7 +71,7 @@ TEST(String, Size) {
 
 TEST(String, Mult) {
   String s1("ABC");
-  s1 *= 2;
+  s1 *= 3;
 
   EXPECT_EQ(s1, String("ABCABCABC"));
 
@@ -81,6 +79,8 @@ TEST(String, Mult) {
   EXPECT_EQ(s2, String("ABCABCABCABCABCABCABCABCABC"));
 }
 
+/*
+ *
 TEST(String, Trim) {
   String s("  abc   ____");
 

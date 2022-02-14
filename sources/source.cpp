@@ -10,19 +10,30 @@ char* prepareStringConcat(const char* str1, const char* str2) {
     temp[i] = str1[i];
   }
   for (size_t j = 0; j < size2; j++) {
-    temp[j+size1] = str2[j];
+    temp[j + size1] = str2[j];
   }
   temp[size1 + size2] = '\0';
   return temp;
 }
 
+char* prepareStringMultiplication(const char* str, unsigned int m) {
+  size_t size = strlen(str);
+  char* temp = new char[size * m + 1];
+  for (size_t i = 0; i < size; i++) {
+    for (size_t j = 0; j < m; j++) {
+      temp[i + size * j] = str[i];
+    }
+  }
+  temp[size * m] = '\0';
+  return temp;
+}
 
 String::String() {
   Data = new char[1];
   Data[0] = '\0';
 }
 
-String::String(const char *data) {
+String::String(const char* data) {
   size_t size = strlen(data);
   Data = new char[size + 1];
   for (size_t i = 0; i < size + 1; i++) {
@@ -30,14 +41,11 @@ String::String(const char *data) {
   }
 }
 
-String::String(const String &rhs): String(rhs.Data) {
-}
+String::String(const String& rhs) : String(rhs.Data) {}
 
-String::~String() {
-  delete [] Data;
-}
+String::~String() { delete[] Data; }
 
-String &String::operator=(const String &rhs) {
+String& String::operator=(const String& rhs) {
   if (this != &rhs) {
     size_t size = strlen(rhs.Data);
     delete[] Data;
@@ -50,17 +58,17 @@ String &String::operator=(const String &rhs) {
 }
 
 String& String::operator+=(const String& rhs) {
-    char* temp = prepareStringConcat(Data, rhs.Data);
-    delete[] Data;
-    Data = temp;
-    return *this;
+  char* temp = prepareStringConcat(Data, rhs.Data);
+  delete[] Data;
+  Data = temp;
+  return *this;
 }
 
 String& String::operator+=(const char* rhs) {
-    char* temp = prepareStringConcat(Data, rhs);
-    delete[] Data;
-    Data = temp;
-    return *this;
+  char* temp = prepareStringConcat(Data, rhs);
+  delete[] Data;
+  Data = temp;
+  return *this;
 }
 
 String String::operator+(const char* rhs) {
@@ -70,13 +78,11 @@ String String::operator+(const char* rhs) {
   return result;
 }
 
-String String::operator+(const String& rhs) {
-    return *this + rhs.Data;
-}
+String String::operator+(const String& rhs) { return *this + rhs.Data; }
 
-size_t String::Size() const {
-  return strlen(Data);
-}
+size_t String::Size() const { return strlen(Data); }
+
+bool String::Empty() const { return strlen(Data) == 0; }
 
 void String::Replace(char oldSymbol, char newSymbol) {
   for (size_t i = 0; i < strlen(Data); i++) {
@@ -84,6 +90,20 @@ void String::Replace(char oldSymbol, char newSymbol) {
       Data[i] = newSymbol;
     }
   }
+}
+
+String String::operator*(unsigned int m) {
+  char* temp = prepareStringMultiplication(Data, m);
+  String result(temp);
+  delete[] temp;
+  return result;
+}
+
+String& String::operator*=(unsigned int m) {
+  char* temp = prepareStringMultiplication(Data, m);
+  delete[] Data;
+  Data = temp;
+  return *this;
 }
 
 std::ostream& operator<<(std::ostream& o, const String& s) {

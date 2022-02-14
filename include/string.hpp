@@ -41,6 +41,8 @@ class String {
 
   String operator+(const String& rhs);
 
+  String operator*(unsigned int m);
+
   /// Оператор *=
   /// <returns>Возвращаем ссылку на себя</returns>
   String& operator*=(unsigned int m);
