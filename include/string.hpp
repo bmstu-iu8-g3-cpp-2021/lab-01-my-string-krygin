@@ -5,24 +5,25 @@
 
 #include <cstddef>
 #include <iostream>
+#include <cstring>
+#include <utility>
 
 class String {
  public:
   /// Деструктор
   ~String() {
       delete [] Data;
-  };
+  }
 
   /// Конструктор по умолчанию
   String() {
       Data = new char[1];
       Data[0] = '\0';
-  };
+  }
 
   /// Конструктор копирования
   /// <param name="rhs">Объект, который копируем </param>
-  String(const String& rhs): String(rhs.Data) {
-
+  explicit String(const String& rhs): String(rhs.Data) {
   }
 
   /// Пользовательский конструктор
@@ -34,7 +35,7 @@ class String {
       for (size_t i = 0; i < size + 1; i++) {
         Data[i] = data[i];
       }
-  };
+  }
 
   /// Оператор присваивания
   /// <param name="data">Объект, который копируем </param>
@@ -49,7 +50,7 @@ class String {
       }
     }
     return *this;
-  };
+  }
 
   /// Оператор +=
   /// <param name="rhs">Объект, который стоит после знака '+=' </param>
@@ -65,7 +66,7 @@ class String {
   /// <returns>Возвращаем значения равенства двух строк</returns>
   bool operator==(const String& rhs) const {
       return strcmp(Data, rhs.Data) == 0;
-  };
+  }
 
   /// Оператор &lt;
   /// <param name="rhs">Объект, который стоит после знака "&lt;" </param>
@@ -101,7 +102,7 @@ class String {
   /// <returns> Значение символа в строке с индексом index</returns>
   char operator[](size_t index) const {
       return Data[index];
-  };
+  }
 
   /// Оператор []
   /// <example>
@@ -114,7 +115,7 @@ class String {
   /// <returns> Ссылка на символ в строке с индексом index</returns>
   char& operator[](size_t index) {
       return Data[index];
-  };
+  }
 
   /// Смотри пример
   /// <example>
@@ -141,7 +142,7 @@ class String {
   friend std::ostream& operator<<(std::ostream& o, const String& s) {
       o << s.Data;
       return o;
-  };
+  }
 
   friend bool operator==(const char* a, const String& b) {
     return strcmp(a, b.Data) == 0;
