@@ -23,13 +23,13 @@ class String {
 
   /// Конструктор копирования
   /// <param name="rhs">Объект, который копируем </param>
-  explicit String(const String& rhs): String(rhs.Data) {
+  String(const String& rhs): String(rhs.Data) {
   }
 
   /// Пользовательский конструктор
   /// <param name="data">Данные, которые требуется поместить в создаваемый
   /// объект </param>
-  String(const char* data) {
+  explicit String(const char* data) {
       size_t size = strlen(data);
       Data = new char[size + 1];
       for (size_t i = 0; i < size + 1; i++) {
